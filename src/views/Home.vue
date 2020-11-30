@@ -53,6 +53,7 @@ export default {
         getMovies (event, navigate = true) {
 
             this.isLoading = true;
+            window.scrollTo(0, 0);
 
             this.urlParams.s = event.name || this.urlParams.s;
             this.urlParams.type = event.type || this.urlParams.type;
@@ -78,7 +79,6 @@ export default {
                     }, 500);
                 })
                 .catch(() => {
-                    console.log('evo me');
                     this.moviesData = [];
                     this.totalResults = 0;
                 });

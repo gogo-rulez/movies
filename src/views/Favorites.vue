@@ -53,7 +53,6 @@ export default {
 
     mounted () {
         if (!this.favorites) return;
-        console.log(this.favorites);
         this.getMovies(this.urlParams, false);
     },
 

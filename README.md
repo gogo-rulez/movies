@@ -1,5 +1,5 @@
 # movies
-A Vue app for searching movies and series. It uses the IMDB api and the user can search by name and filter by type and year of release. User can also create a list of favorites by clicking on the star icon.
+A Vue app for searching movies and series. It uses the OMDB api and the user can search by name and filter by type and year of release. User can also create a list of favorites by clicking on the star icon.
 
 ## Project setup
 ```

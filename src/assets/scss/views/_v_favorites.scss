@@ -15,16 +15,27 @@ $f: favorites;
     }
 
     .search_results {
-        flex: 1 0 100%;
-        max-width: unset;
+
         @include min-screen($desktop) {
-            margin: 30px 0;
+            margin: 0;
         }
 
         .is-grid-view {
+            display: grid;
+            grid-auto-flow: row;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto auto;
+            grid-gap: 15px;
+
+            @include min-screen($tablet) {
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: auto auto auto auto;
+            }
+
             @include min-screen($desktop) {
-                grid-template-columns: repeat(4, 1fr);
-                grid-template-rows: auto;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                grid-template-rows: auto auto auto auto;
+                grid-gap: 30px;
             }
         }
 
@@ -33,6 +44,4 @@ $f: favorites;
             visibility: hidden;
         }
     }
-
-
 }
