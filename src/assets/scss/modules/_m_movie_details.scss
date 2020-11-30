@@ -39,6 +39,7 @@ $mv: movie_details;
 
         @include min-screen($tablet) {
             margin: 0 0 0 30px;
+            width: 100%;
         }
     }
 

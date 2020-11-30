@@ -79,10 +79,6 @@
 
 <script>
 import { api } from '@/mixins/axiosMixin';
-import Vue from 'vue';
-import VueLocalStorage from 'vue-localstorage';
-
-Vue.use(VueLocalStorage);
 
 export default {
     name: 'MovieDetails',
@@ -102,7 +98,6 @@ export default {
         this.getMovieDetails();
 
         if (!this.favoritesIds) return;
-        console.log(this.favorites);
         this.isFavorite = this.favoritesIds.includes(this.$route.params.movieId);
     },
 
@@ -112,7 +107,6 @@ export default {
             api
                 .get('/', { params: { i: movieId } })
                 .then(response => {
-                    console.log({ response });
                     this.movieDetails = { ...response.data };
                     this.imdbRating = parseInt(this.movieDetails.imdbRating, 10);
                     this.dataIsReady = true;

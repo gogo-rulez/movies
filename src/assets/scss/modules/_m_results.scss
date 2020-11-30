@@ -65,7 +65,7 @@ $sr: search_results;
             grid-auto-flow: row;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: auto auto auto auto;
-            gap: 15px;
+            grid-gap: 15px;
 
             @include min-screen($tablet) {
                 grid-template-columns: 1fr 1fr 1fr;
@@ -73,7 +73,7 @@ $sr: search_results;
             }
 
             @include min-screen($desktop) {
-                gap: 30px;
+                grid-gap: 30px;
             }
         }
 
@@ -90,44 +90,44 @@ $sr: search_results;
         display: none;
 
         @include min-screen($desktop) {
-            display: grid;
-            grid-template-columns: 100px 2fr 1fr 1fr 50px;
-            grid-template-rows: auto;
-            column-gap: 20px;
+            display: flex;
+            align-items: center;
             height: 50px;
-            padding: 0 20px;
+            padding: 0 20px 0 140px;
             margin: 30px 0 0;
             background-color: $grey;
             font: $fontBold;
             font-size: rem(18);
             line-height: rem(34);
-        }
 
-        @include min-screen($widescreen) {
-            height: 60px;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: 150px 2fr 1fr 1fr 50px;
-            grid-template-rows: auto;
-            column-gap: 20px;
-            font-size: rem(22);
-            line-height: rem(38);
-        }
-
-        span {
-            align-self: center;
-
-            &:nth-child(2) {
-                @include min-screen($desktop) {
-                    transform: translateX(-120px);
+            span {
+                &:nth-child(1) {
+                    width: 100px;
+                    display: none;
                 }
 
-                @include min-screen($widescreen) {
-                    transform: translateX(-170px);
+                &:nth-child(2) {
+                    width: calc(((100% - 50px) * 0.5));
+                    text-indent: -120px;
+                }
+
+                &:nth-child(3),
+                &:nth-child(4) {
+                    width: calc((100% - 50px) * 0.25);
                 }
             }
         }
 
+        @include min-screen($widescreen) {
+            padding: 0 20px 0 190px;
+
+            span {
+                &:nth-child(2) {
+                    text-indent: -170px;
+                }
+            }
+
+        }
     }
 
     &__item {
@@ -161,6 +161,7 @@ $sr: search_results;
     }
 
     &__link {
+        position: relative;
         display: flex;
         color: $black;
         height: 100%;
@@ -181,7 +182,12 @@ $sr: search_results;
         height: auto;
 
         .is-grid-view & {
+            display: flex;
+            flex-direction: column;
+
             width: 100%;
+            font-size: 0;
+            line-height: 0;
         }
 
         .is-list-view & {
@@ -229,8 +235,13 @@ $sr: search_results;
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0;
+            bottom: 0;
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 100%;
+            margin: auto;
             object-fit: contain;
         }
 
@@ -241,40 +252,35 @@ $sr: search_results;
         .is-grid-view & {
             display: flex;
             flex-direction: column;
-            padding: 10px 15px 0;
-            height: 100%;
+            padding: 10px 15px 45px;
         }
 
         .is-list-view & {
-            display: grid;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
             width: 100%;
-            grid-template-columns: 2fr 1fr;
-            grid-template-rows: auto;
-            margin: 0 0 0 10px;
+            padding: 0 10px;
 
-            @include min-screen($tablet) {
-                grid-template-areas: none;
-                grid-template-columns: 2fr 1fr 1fr 50px;
-                grid-template-rows: auto;
-                column-gap: 20px;
-                margin: 0 0 0 20px;
+            @include min-screen($desktop) {
+                padding: 0 0 0 20px;
             }
         }
     }
 
     &__item_name {
-        font: $fontReg;
+        font: $fontBold;
         font-size: rem(14);
-        line-height: rem(30);
+        line-height: rem(20);
 
         @include min-screen($desktop) {
             font-size: rem(18);
-            line-height: rem(34);
+            line-height: rem(24);
         }
 
         @include min-screen($widescreen) {
             font-size: rem(22);
-            line-height: rem(38);
+            line-height: rem(26);
         }
 
         .is-grid-view & {
@@ -282,16 +288,22 @@ $sr: search_results;
         }
 
         .is-list-view & {
+
             @include max-screen($tablet - 1) {
-                order: 1
+                width: 100%;
+                max-height: 40px;
+                padding: 0 10px 0 0;
+                order: 1;
+                overflow: hidden;
             }
+
+            @include min-screen($tablet) {
+                width: calc((100% - 50px) * 0.34)
+            }
+
 
             @include min-screen($desktop) {
-                width: 200px;
-            }
-
-            @include min-screen($widescreen) {
-                width: 300px;
+                width: calc((100% - 50px) * 0.5);
             }
         }
     }
@@ -299,20 +311,20 @@ $sr: search_results;
     &__item_meta {
         font: $fontReg;
         font-size: rem(12);
-        line-height: rem(30);
+        line-height: rem(20);
 
         @include min-screen($desktop) {
             font-size: rem(16);
-            line-height: rem(34);
+            line-height: rem(24);
         }
 
         @include min-screen($widescreen) {
             font-size: rem(20);
-            line-height: rem(38);
+            line-height: rem(28);
         }
 
         .is-grid-view & {
-            margin: 15px 0 0;
+            margin: 15px 0;
             text-align: center;
         }
     }
@@ -322,12 +334,11 @@ $sr: search_results;
     &__item_type {
         font: $fontReg;
         font-size: rem(12);
-        line-height: rem(30);
+        line-height: rem(20);
 
         span {
             @include min-screen($desktop) {
                 display: none;
-
             }
         }
 
@@ -344,11 +355,21 @@ $sr: search_results;
         .is-grid-view & {
             text-align: center;
         }
+
+        .is-list-view & {
+            @include min-screen($tablet) {
+                width: calc((100% - 50px) * 0.33)
+            }
+
+            @include min-screen($desktop) {
+                width: calc((100% - 50px) * 0.25)
+            }
+        }
     }
     &__item_type {
         .is-list-view & {
             @include max-screen($tablet - 1) {
-                order: 3
+                order: 2;
             }
         }
     }
@@ -356,35 +377,50 @@ $sr: search_results;
     &__item_year {
         .is-list-view & {
             @include max-screen($tablet - 1) {
-                order: 4
+                margin: 0 0 0 20px;
+                order: 3
             }
         }
     }
 
     &__favorite_btn {
         display: block;
-        width: 70px;
         height: 40px;
 
         .is-grid-view & {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 70px;
             text-align: center;
-            margin: auto auto 0;
+            margin: auto;
         }
 
         .is-list-view & {
             @include max-screen($tablet - 1) {
-                order: 2
+                display: inline-flex;
+                justify-content: flex-end;
+                width: 40px;
+                margin: 0 0 0 auto;
+                order: 4;
             }
 
             @include min-screen($tablet) {
                 display: flex;
                 justify-content: flex-end;
                 width: auto;
+                width: 50px;
+                margin: 0 0 0 auto;
             }
         }
 
         .icon {
             font-size: rem(24);
+
+            .is-list-view & {
+                line-height: rem(38);
+            }
 
             @include min-screen($desktop) {
                 line-height: rem(34);

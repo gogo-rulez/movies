@@ -213,7 +213,6 @@ export default {
                 localStorage.setItem('movieFavorites', JSON.stringify(this.favorites));
             } else {
                 this.favoritesIds.push(movie.imdbID);
-                console.log({ movie });
                 this.favorites.push(movie);
                 localStorage.setItem('movieFavoritesIds', JSON.stringify(this.favoritesIds));
                 localStorage.setItem('movieFavorites', JSON.stringify(this.favorites));
