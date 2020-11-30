@@ -1,39 +1,47 @@
 <template>
-    <div class="site_wrap home">
+    <div class="site_wrap favorites">
 
-        <search-form
-            @emitSearch="getMovies($event)"
-        />
+        <h3
+            v-if="!favorites.length"
+            class="favorites__title">
+            Uups! No favorites to display
+        </h3>
 
-        <search-results
-            :is-loading="isLoading"
-            :movies-list="moviesData"
-            :page="urlParams.page"
-            :total-results="totalResults"
-            @emitSearch="getMovies($event)"
-        />
+        <template v-else>
+            <search-results
+                :is-loading="isLoading"
+                :movies-list="favorites"
+                :page="urlParams.page"
+                :total-results="totalResults"
+                @emitSearch="getMovies($event)"
+                @toggleFavorites="refreshFavorites()"
+            />
+        </template>
+
     </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import SearchForm from '@/components/SearchForm';
+import Vue from 'vue';
 import SearchResults from '@/components/SearchResults';
 import { api } from '@/mixins/axiosMixin';
+import { VueSpinners } from '@saeris/vue-spinners';
 
+Vue.use(VueSpinners);
 
 export default {
-    name: 'Home',
+    name: 'Favorites',
     components: {
-        SearchForm,
         SearchResults
     },
 
     data () {
         return {
+            favorites: JSON.parse(localStorage.getItem('movieFavorites')) || [],
             moviesData: [],
             totalResults: 0,
-            isLoading: false,
+            isLoading: true,
             urlParams: {
                 s: this.$route.query.s || '', // movie name
                 type: this.$route.query.type || '',
@@ -44,7 +52,8 @@ export default {
     },
 
     mounted () {
-        if (!Object.keys(this.$route.query).length) return;
+        if (!this.favorites) return;
+        console.log(this.favorites);
         this.getMovies(this.urlParams, false);
     },
 
@@ -76,12 +85,11 @@ export default {
                     setTimeout(() => {
                         this.isLoading = false;
                     }, 500);
-                })
-                .catch(() => {
-                    console.log('evo me');
-                    this.moviesData = [];
-                    this.totalResults = 0;
                 });
+        },
+
+        refreshFavorites () {
+            this.favorites = JSON.parse(localStorage.getItem('movieFavorites')) || [];
         }
 
     }

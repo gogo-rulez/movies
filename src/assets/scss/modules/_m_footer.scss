@@ -1,0 +1,50 @@
+$f: footer;
+
+.#{$f} {
+    position: fixed;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    background: $blue;
+
+    @include min-screen($desktop) {
+        position: static;
+        height: 50px;
+    }
+
+    @include min-screen($widescreen) {
+        height: 60px;
+    }
+
+
+    &__inner_wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        @include min-screen($desktop) {
+            width: $desktop;
+            margin: 0 auto;
+        }
+
+        @include min-screen($widescreen) {
+            width: $widescreen;
+        }
+    }
+
+    &__copyright {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        font: $fontBold;
+        font-size: rem(14);
+        line-height: rem(30);
+        color: #fff;
+
+        @include min-screen($desktop) {
+            font-size: rem(18);
+            line-height: rem(40);
+        }
+    }
+}

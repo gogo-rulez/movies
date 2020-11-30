@@ -1,0 +1,9 @@
+$h: home;
+
+.#{$h} {
+    @include min-screen($desktop) {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+}

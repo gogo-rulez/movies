@@ -1,0 +1,17 @@
+// color scheme - https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_theme_blue
+$blue: #2196f3;
+$dark-blue: #074b83;
+$black: #000;
+$grey: #ccc;
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
+$fontReg: normal 400 100% "Roboto", sans-serif;
+$fontRegItalic: italic 400 100% "Roboto", sans-serif;
+$fontBold: normal 700 100% "Roboto", sans-serif;
+
+// breakpoints
+$phablet: 550px;
+$tablet: 768px;
+$desktop: 1024px;
+$widescreen: 1360px;

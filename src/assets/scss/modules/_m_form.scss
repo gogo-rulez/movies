@@ -1,0 +1,117 @@
+$sf: search_form;
+
+.#{$sf} {
+
+    width: 100%;
+
+    @include min-screen($phablet) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-columns: auto;
+        gap: 15px;
+    }
+
+    @include min-screen($desktop) {
+        display: inline-flex;
+        flex-direction: column;
+        flex: 0 0 300px;
+        margin: 40px 0 0;
+        gap: 0;
+    }
+
+    &__row_wrap {
+        display: flex;
+        flex-direction: column;
+
+        &.has-select {
+            position: relative;
+            z-index: 2;
+        }
+
+        &:not(:first-child) {
+            margin: 20px 0 0;
+
+            @include min-screen($phablet) {
+                margin: 0;
+            }
+
+            @include min-screen($desktop) {
+                margin: 20px 0 0;
+            }
+        }
+    }
+
+    &__button_wrap {
+        margin: 30px 0 0;
+    }
+
+    &__label {
+        font: $fontReg;
+        font-size: rem(14);
+        line-height: rem(30);
+        color: $black;
+    }
+
+    &__input,
+    &__select {
+        box-sizing: border-box;
+        height: 40px;
+        padding: 0 8px;
+        border-radius: 6px;
+        border: 1px solid $grey;
+        font: $fontReg;
+        font-size: rem(14);
+    }
+
+    &__select_wrap {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        height: 38px;
+        border-radius: 8px;
+        padding: 0 8px;
+        margin: 0 -8px;
+        background-color: #fff;
+        overflow: hidden;
+
+        &.is-opened {
+            padding: 0 12px;
+            margin: -2px -12px;
+            height: calc(3 * 38px);
+            box-shadow: 0px 2px 8px 0px rgba(115, 100, 93, 0.5);
+        }
+
+        span {
+            display: flex;
+            align-items: center;
+            flex: 1 0 38px;
+
+            &:first-child {
+                text-transform: capitalize;
+            }
+
+            &:nth-child(2) {
+                border-top: 1px solid $grey;
+            }
+        }
+    }
+
+    &__submit_btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        border-radius: 6px;
+        background-color: $blue;
+        font: $fontReg;
+        font-size: rem(14);
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.33s;
+
+        &:hover {
+            background-color: $dark-blue;
+        }
+    }
+
+}
